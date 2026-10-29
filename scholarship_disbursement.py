@@ -30,7 +30,9 @@ def disburse(award_id):
 
     Returns None if no award with the given id exists.
     """
-    row = conn.execute("SELECT amount FROM awards WHERE id = ?", (award_id,)).fetchone()
+    row = conn.execute(
+        "SELECT amount FROM awards WHERE id = ?", (award_id,)
+    ).fetchone()
     if row is None:
         return None
     conn.execute("UPDATE awards SET disbursed = 1 WHERE id = ?", (award_id,))
@@ -53,7 +55,9 @@ def by_scheme_count(scheme):
     """Return the number of awards under the given scheme."""
     if scheme is None:
         return 0
-    return conn.execute("SELECT COUNT(*) FROM awards WHERE scheme = ?", (scheme,)).fetchone()[0]
+    return conn.execute(
+        "SELECT COUNT(*) FROM awards WHERE scheme = ?", (scheme,)
+    ).fetchone()[0]
 
 
 def main():
